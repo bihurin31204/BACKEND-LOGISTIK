@@ -1,0 +1,62 @@
+paths:
+  /emails/send-emails:
+    post:
+      summary: Send bulk emails
+      tags:
+        - Emails
+      description: Endpoint untuk mengirimkan email ke banyak penerima dengan subjek dan pesan yang disesuaikan.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                recipients:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        example: user@example.com
+                subject:
+                  type: string
+                  example: Promo Pengiriman Termurah di Indonesia
+                message:
+                  type: string
+                  example: Kami hadir untuk membantu Anda mengirim barang ke seluruh Indonesia dengan harga terbaik.
+      responses:
+        "200":
+          description: Emails sent successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: 10 emails sent successfully
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Subject and message are required
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Failed to send emails

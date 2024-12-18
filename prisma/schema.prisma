@@ -1,0 +1,41 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+  username String
+  items    Item[]
+}
+
+model Item {
+  id           Int      @id @default(autoincrement())
+  name         String
+  weight       Float
+  distance     Int
+  shippingFee  Int
+  address      String
+  userId       Int
+  createdAt    DateTime @default(now())
+  receiverCity String
+  receiverId   String
+  senderCity   String
+  senderId     String
+  status       String   @default("Diproses")
+  user         User     @relation(fields: [userId], references: [id])
+}
+
+model CityDistance {
+  id          Int    @id @default(autoincrement())
+  origin      String
+  destination String
+  distance    Int
+}
