@@ -13,7 +13,7 @@ const getCityDistance = async (origin, destination) => {
     });
   }
 
-  // Jika tetap tidak ditemukan, lempar error
+  // Jika tetap tidak ditemukan, lempar errorr
   if (!cityDistance) {
     throw new Error(`Distance not found for ${origin} to ${destination}`);
   }
