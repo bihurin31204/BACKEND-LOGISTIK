@@ -5,7 +5,7 @@ const checkShippingFee = async (req, res) => {
   const { name, weight, senderCity, receiverCity } = req.body;
 
   try {
-    // Validasi input
+    // Validasi inputt
     if (!name || !weight || !senderCity || !receiverCity) {
       return res.status(400).json({ error: "All fields are required" });
     }
